@@ -31,7 +31,7 @@ candy = pygame.transform.scale(candy,(50,50))
 candy_x = random.randint(0,window.width-candy.width)
 candy_y=0
 candy_vel_x=0
-candy_vel_y=0.88
+candy_vel_y=6
 
 def collision_detection():
     return (
@@ -41,16 +41,24 @@ def collision_detection():
         candy_y + candy.height > player_y
     )
 
-game_state = 1
+game_state = 0
+clock = pygame.time.Clock()
+
 while True: 
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             quit(0)
         if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                game_state = 1
+                score = 0
+                lives = 3
+                lives_text = score_font.render(f"Lives: {lives}", True, (255, 255, 255))
+                score_text = score_font.render(f"Score: {score}", True, (255, 255, 255))
             if event.key == pygame.K_LEFT:
-                player_vel_x = -1.2
+                player_vel_x = -5
             if event.key == pygame.K_RIGHT:
-                player_vel_x = 1.2
+                player_vel_x = 5
         else: 
             player_vel_x = 0
             player_vel_y = 0
@@ -75,6 +83,13 @@ while True:
     #output
     window.fill((255,255,255))
     window.blit(bg, (0,0))
+    if game_state == 0:
+        welcome_text = score_font.render("Welcome to Catch the Candy", True, (255, 255, 255))
+        welcome_text1 = score_font.render("Press SPACE to start", True, (255, 255, 255))
+        window.blit(welcome_text, (8, 600 // 2 - 50))
+        window.blit(welcome_text1, (50, 600 // 2))
+
+        
     if game_state == 1:
         player_x += player_vel_x
         player_y += player_vel_y
@@ -87,10 +102,13 @@ while True:
         window.blit(score_text, (15, 15))
         window.blit(lives_text, (300, 15))
         
-    else: 
-        game_over_text = score_font.render("GAME OVER", True, (255, 0, 0))
-        window.blit(game_over_text, (400 // 2 - 60, 600 // 2 - 50))
-        window.blit(score_text, (400 // 2 - 50, 600 // 2))
+    if game_state == 2:
+        game_over_text = score_font.render("GAME OVER", True, (255, 255, 255))
+        try_again = score_font.render("Press SPACE to try again", True, (255, 255, 255))
+        window.blit(game_over_text, (140, 250))
+        window.blit(score_text, (150, 300))
+        window.blit(try_again, (25, 350))
     
     pygame.display.flip()
+    clock.tick(60)
 
