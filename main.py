@@ -70,8 +70,10 @@ while True:
         if collision_detection():
             score +=1 
             score_text = score_font.render(f"Score: {score}", True, (255, 255, 255))
+            candy_vel_y+=0.1
             candy_y = 0
             candy_x=random.randint(0,window.width-candy.width)
+            
         if candy_y > 550:
             lives -= 1
             candy_y = 0
