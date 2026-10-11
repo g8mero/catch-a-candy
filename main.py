@@ -1,23 +1,37 @@
 import pygame
 import random
 
+import os
+import sys
+
+def resource_path(relative_path):
+    """Get the correct path for assets in development and PyInstaller."""
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 pygame.init()
-score_font = pygame.font.Font("assets/karmatic-arcade.ttf", 19)
+game_font = pygame.font.Font(
+    resource_path("assets/karmatic-arcade.ttf"), 19)
 
 
 window = pygame.display.set_mode((400, 600))
-bg = pygame.image.load("assets/bg.png")
+bg = pygame.image.load(resource_path("assets/bg.png")).convert_alpha()
 bg = pygame.transform.scale(bg,(400,600))
 pygame.display.set_caption("Catch the Candy")
 
 score = 0
-score_text = score_font.render(f"Score: {score}", True, (255, 255,255))
+score_text = game_font.render(f"Score: {score}", True, (255, 255,255))
 lives = 3
-lives_text = score_font.render(f"Lives: {lives}", True, (255, 255,255))
+lives_text = game_font.render(f"Lives: {lives}", True, (255, 255,255))
 
 player = pygame.surface.Surface((100,100))
 player.fill((255,255,255))
-player = pygame.image.load("assets/cat-sprite.png").convert_alpha()
+player = pygame.image.load(
+    resource_path("assets/cat-sprite.png")).convert_alpha()
 player = pygame.transform.scale(player,(100,100))
 player_x = 0
 player_y=400
@@ -26,7 +40,8 @@ player_vel_y=0
 
 candy = pygame.surface.Surface((100,100))
 candy.fill((255,255,255))
-candy = pygame.image.load("assets/candy-sprite.png").convert_alpha()
+candy = pygame.image.load(
+    resource_path("assets/candy-sprite.png")).convert_alpha()
 candy = pygame.transform.scale(candy,(50,50))
 candy_x = random.randint(0,window.width-candy.width)
 candy_y=0
@@ -53,8 +68,9 @@ while True:
                 game_state = 1
                 score = 0
                 lives = 3
-                lives_text = score_font.render(f"Lives: {lives}", True, (255, 255, 255))
-                score_text = score_font.render(f"Score: {score}", True, (255, 255, 255))
+                candy_vel_y=8
+                lives_text = game_font.render(f"Lives: {lives}", True, (255, 255, 255))
+                score_text = game_font.render(f"Score: {score}", True, (255, 255, 255))
             if event.key == pygame.K_LEFT:
                 player_vel_x = -6
             if event.key == pygame.K_RIGHT:
@@ -69,7 +85,7 @@ while True:
             candy_x=random.randint(0,window.width-candy.width)
         if collision_detection():
             score +=1 
-            score_text = score_font.render(f"Score: {score}", True, (255, 255, 255))
+            score_text = game_font.render(f"Score: {score}", True, (255, 255, 255))
             candy_vel_y+=0.1
             candy_y = 0
             candy_x=random.randint(0,window.width-candy.width)
@@ -78,7 +94,7 @@ while True:
             lives -= 1
             candy_y = 0
             candy_x=random.randint(0,window.width-candy.width)
-            lives_text = score_font.render(f"Lives: {lives}", True, (255, 255, 255))
+            lives_text = game_font.render(f"Lives: {lives}", True, (255, 255, 255))
             if lives < 1:
                 game_state = 2
 
@@ -86,8 +102,8 @@ while True:
     window.fill((255,255,255))
     window.blit(bg, (0,0))
     if game_state == 0:
-        welcome_text = score_font.render("Welcome to Catch the Candy", True, (255, 255, 255))
-        welcome_text1 = score_font.render("Press SPACE to start", True, (255, 255, 255))
+        welcome_text = game_font.render("Welcome to Catch the Candy", True, (255, 255, 255))
+        welcome_text1 = game_font.render("Press SPACE to start", True, (255, 255, 255))
         window.blit(welcome_text, (8, 600 // 2 - 50))
         window.blit(welcome_text1, (50, 600 // 2))
 
@@ -105,8 +121,8 @@ while True:
         window.blit(lives_text, (300, 15))
         
     if game_state == 2:
-        game_over_text = score_font.render("GAME OVER", True, (255, 255, 255))
-        try_again = score_font.render("Press SPACE to try again", True, (255, 255, 255))
+        game_over_text = game_font.render("GAME OVER", True, (255, 255, 255))
+        try_again = game_font.render("Press SPACE to try again", True, (255, 255, 255))
         window.blit(game_over_text, (140, 250))
         window.blit(score_text, (150, 300))
         window.blit(try_again, (25, 350))
