@@ -47,10 +47,8 @@ pyinstaller --onefile -w 'main.py'
 
 ## Acknowledgments
 
- * Font [Karmatic Arcade](https://www.1001fonts.com/download/karmatic-arcade.zip))
-
-
-All other assets where drawn digitally on [Piskel App](https://www.piskelapp.)
+ * Font [Karmatic Arcade](https://www.1001fonts.com/download/karmatic-arcade.zip)
+ * All other assets where drawn digitally on [Piskel App](https://www.piskelapp.)
 
 
 
