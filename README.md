@@ -1,9 +1,9 @@
 # Catch a Candy!
 ## About The Project
 
-A submission for Snek, a Hack Club YSWS. Catch a Candy is a simple "Apple and Basket" style game with a Halloween twist. 
+A submission for Snek, a Hack Club YSWS. Catch the Candy is a simple catching basket style game with a Halloween twist. 
 Here, the player is a cat holding a cauldron, and must attempt to catch purple falling candies from the sky. 
-Through this project, I experimented with game design, and pixel art, which are things that are often ignored in my current Computer Science courses.
+Through this project, I experimented with game design and pixel art, which are key aspects of software dev often ignored in my current Computer Science courses.
 
 <div align="center">
     <img src="assets/game-play.png" alt="Game Screenshot" width="250">
@@ -35,8 +35,6 @@ To get a local copy up and running follow these simple example steps.
   ```
 
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1.  Clone the repo
    ```sh
