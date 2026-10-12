@@ -5,7 +5,6 @@ import os
 import sys
 
 def resource_path(relative_path):
-    """Get the correct path for assets in development and PyInstaller."""
     try:
         base_path = sys._MEIPASS
     except AttributeError:
@@ -17,6 +16,8 @@ pygame.init()
 game_font = pygame.font.Font(
     resource_path("assets/karmatic-arcade.ttf"), 19)
 
+
+clock = pygame.time.Clock()
 
 window = pygame.display.set_mode((400, 600))
 bg = pygame.image.load(resource_path("assets/bg.png")).convert_alpha()
@@ -33,7 +34,7 @@ player.fill((255,255,255))
 player = pygame.image.load(
     resource_path("assets/cat-sprite.png")).convert_alpha()
 player = pygame.transform.scale(player,(100,100))
-player_x = 0
+player_x = 150
 player_y=400
 player_vel_x=0
 player_vel_y=0
