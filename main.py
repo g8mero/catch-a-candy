@@ -18,6 +18,7 @@ game_font = pygame.font.Font(
 
 
 clock = pygame.time.Clock()
+isEvil = random.randint(0,1)
 
 window = pygame.display.set_mode((400, 600))
 bg = pygame.image.load(resource_path("assets/bg.png")).convert_alpha()
@@ -76,27 +77,45 @@ while True:
                 player_vel_x = -7
             if event.key == pygame.K_RIGHT:
                 player_vel_x = 7
-        else: 
+        if event.type == pygame.KEYUP:
             player_vel_x = 0
             player_vel_y = 0
 
     if game_state == 1:
+        if isEvil ==0:
+            candy = pygame.image.load(
+                resource_path("assets/candy-sprite.png")).convert_alpha()
+        if isEvil == 1:
+            candy = pygame.image.load(
+                resource_path("assets/evil-candy.png")).convert_alpha() 
+        candy = pygame.transform.scale(candy,(50,50))
         if candy_y >= window.height:
+            isEvil = random.randint(0,1)
             candy_y=0
             candy_x=random.randint(0,window.width-candy.width)
         if collision_detection():
-            score +=1 
+            if isEvil==0:
+                score +=1 
+            else:
+                lives-=1
+                if lives < 1:
+                    game_state = 2
             score_text = game_font.render(f"Score: {score}", True, (255, 255, 255))
-            candy_y = 0
-            candy_x=random.randint(0,window.width-candy.width)
-            
-        if candy_y > 550:
-            lives -= 1
-            candy_y = 0
-            candy_x=random.randint(0,window.width-candy.width)
             lives_text = game_font.render(f"Lives: {lives}", True, (255, 255, 255))
-            if lives < 1:
-                game_state = 2
+            isEvil = random.randint(0,1)
+            candy_y = 0
+            candy_x=random.randint(0,window.width-candy.width)
+
+            
+        if candy_y > 420:
+            if isEvil == 0:
+                lives -= 1
+                isEvil = random.randint(0,1)
+                candy_y = 0
+                candy_x=random.randint(0,window.width-candy.width)
+                lives_text = game_font.render(f"Lives: {lives}", True, (255, 255, 255))
+                if lives < 1:
+                    game_state = 2
 
     #output
     window.fill((255,255,255))
@@ -122,7 +141,7 @@ while True:
         
     if game_state == 2:
         game_over_text = game_font.render("GAME OVER", True, (255, 255, 255))
-        try_again = game_font.render("Press SPACE to try again", True, (255, 255, 255))
+        try_again = game_font.render("Press ANY KEY to try again", True, (255, 255, 255))
         window.blit(game_over_text, (140, 250))
         window.blit(score_text, (150, 300))
         window.blit(try_again, (25, 350))
