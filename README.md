@@ -5,6 +5,10 @@ A submission for Snek, a Hack Club YSWS. Catch a Candy is a simple "Apple and Ba
 Here, the player is a cat holding a cauldron, and must attempt to catch purple falling candies from the sky. 
 Through this project, I experimented with game design, and pixel art, which are things that are often ignored in my current Computer Science courses.
 
+<div align="center">
+    <img src="assets/game-play.png" alt="Game Screenshot" width="250">
+</div>
+
 See `/assets` to see my designs!
 
 ### Built With
