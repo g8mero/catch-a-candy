@@ -46,7 +46,7 @@ candy = pygame.transform.scale(candy,(50,50))
 candy_x = random.randint(0,window.width-candy.width)
 candy_y=0
 candy_vel_x=0
-candy_vel_y=8
+candy_vel_y=9
 
 def collision_detection():
     return (
@@ -64,7 +64,7 @@ while True:
         if event.type==pygame.QUIT:
             quit(0)
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE and game_state==0 or game_state==2:
                 game_state = 1
                 score = 0
                 lives = 3
@@ -72,9 +72,9 @@ while True:
                 lives_text = game_font.render(f"Lives: {lives}", True, (255, 255, 255))
                 score_text = game_font.render(f"Score: {score}", True, (255, 255, 255))
             if event.key == pygame.K_LEFT:
-                player_vel_x = -6
+                player_vel_x = -7
             if event.key == pygame.K_RIGHT:
-                player_vel_x = 6
+                player_vel_x = 7
         else: 
             player_vel_x = 0
             player_vel_y = 0
