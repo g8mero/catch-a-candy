@@ -40,7 +40,7 @@ _Below is an example of how you can instruct your audience on installing and set
    ```
 2. Navigate to game folder and run
 ```sh
-installer --clean --onefile --add-data "assets;assets" main.py 
+pyinstaller --clean --onefile --add-data "assets;assets" main.py 
 ```
 3. Open .exe file in ./dist.
 
