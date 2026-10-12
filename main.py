@@ -122,9 +122,11 @@ while True:
     window.blit(bg, (0,0))
     if game_state == 0:
         welcome_text = game_font.render("Welcome to Catch the Candy", True, (255, 255, 255))
-        welcome_text1 = game_font.render("Press SPACE to start", True, (255, 255, 255))
-        window.blit(welcome_text, (8, 600 // 2 - 50))
-        window.blit(welcome_text1, (50, 600 // 2))
+        welcome_text1 = game_font.render("Rules in GH Repo", True, (255, 255, 255))
+        welcome_text2 = game_font.render("Press SPACE to start", True, (255, 255, 255))
+        window.blit(welcome_text, (8, 200))
+        window.blit(welcome_text1, (90, 250))
+        window.blit(welcome_text2, (50, 300))
 
         
     if game_state == 1:
@@ -142,9 +144,9 @@ while True:
     if game_state == 2:
         game_over_text = game_font.render("GAME OVER", True, (255, 255, 255))
         try_again = game_font.render("Press ANY KEY to try again", True, (255, 255, 255))
-        window.blit(game_over_text, (140, 250))
-        window.blit(score_text, (150, 300))
-        window.blit(try_again, (25, 350))
+        window.blit(game_over_text, (140, 200))
+        window.blit(score_text, (150, 250))
+        window.blit(try_again, (20, 300))
     
     pygame.display.flip()
     clock.tick(60)
