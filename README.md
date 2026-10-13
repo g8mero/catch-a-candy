@@ -34,18 +34,6 @@ To get a local copy up and running follow these simple example steps.
   pip install pyinstaller
   ```
 
-### Installation
-
-1.  Clone the repo
-   ```sh
-   git clone https://github.com/g8mero/catch-a-candy
-   ```
-2. Navigate to game folder and run
-```sh
-pyinstaller --clean --onefile --add-data "assets;assets" main.py 
-```
-3. Open .exe file in ./dist.
-
 
 ## Acknowledgments
 
